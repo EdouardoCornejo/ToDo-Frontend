@@ -1,6 +1,6 @@
 const Todo = ({todo, handleSetComplete, handleDelete}) => {
 
-    const {id, title, completed} = todo
+    const {id, title, date, completed} = todo
 
     return (
         <div className=' flex items-center justify-between p-4 bg-gray-700 border-bborder-solid border-gray-600'>
@@ -16,6 +16,7 @@ const Todo = ({todo, handleSetComplete, handleDelete}) => {
                 }
                 <p className={"pl-1 " + ( completed && 'text-indigo-300 line-through')}>
                     {title}
+                    {date}
                 </p>
             </div>
             <img onClick={() => handleDelete(id)} className='h-5 w-5 cursor-pointer transition-all duration-300 ease-in select-none' src='/close-icon.svg' alt='Close Icon' />  

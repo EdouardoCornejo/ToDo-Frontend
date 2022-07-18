@@ -9,34 +9,45 @@ function App() {
     const [todos, setTodos] = useState([
       {
         id: 1,
-        title: 'Watch the next Marvel Movie',
+        title: 'Make a ToDo Frontend',
+        date: '05/07/2022',
         completed: false,
       },
       {
         id: 2,
-        title: 'Record the next Video',
+        title: 'Watch a movie',
+        date: '15/04/2022',
         completed: false,
       },
       {
         id: 3,
-        title: 'Wash the dishes',
+        title: 'Play a video game',
+        date: '17/06/2022',
         completed: false,
       },
       {
         id: 4,
         title: 'Study  2 hours',
+        date: '14-02/2022',
+        completed: false,
+      },
+      {
+        id: 5,
+        title: 'Make Backend',
+        date: '30/12/2022',
         completed: false,
       }
     ])
-    const [activeFilter, setActiveFilter] = useState('all') //Filtrar los todo de la lista
-    const [filteredTodos, setFilteredTodos] = useState(todos)  //almacen de copia de todos iniciales
+    const [activeFilter, setActiveFilter] = useState('all') //Filter all from the list
+    const [filteredTodos, setFilteredTodos] = useState(todos)  //stock copy of all initials
 
-    const addTodo = (title) => {  
+    const addTodo = (title,date) => {  
       const lastId = todos.length > 0 ? todos[todos.length -1].id :1
 
       const newTodo = {
         id: lastId + 1,
         title,
+        date,
         completed: false
       }
 
@@ -45,7 +56,7 @@ function App() {
         setTodos(todoList)
     }
 
-    const handleSetComplete = (id) => {    //Realizar el cambio completado y no completado
+    const handleSetComplete = (id) => {    //Make the change completed and not completed
       const updatedList = todos.map(todo => {
         if (todo.id === id){
           return {...todo, completed: !todo.completed}
@@ -55,7 +66,7 @@ function App() {
       setTodos(updatedList)
     }
 
-    const handleDelete = (id) => {  // Filtrar para eliminar todo  
+    const handleDelete = (id) => {  // Filter to remove all
       const updatedList = todos.filter(todo => todo.id !== id)
         setTodos(updatedList)
     }
@@ -90,12 +101,12 @@ function App() {
   },[activeFilter, todos])
 
   return (
-  <div className='bg-gray-800 min-h-screen h-full font-inter text-gray-100 flex items-center justify-center py-20 px-5'>
+  <div className='bg-white m-h-screen h-full font-inter text-gray-100 flex items-center justify-center py-10 px-5'>
     <div className='rounded-xl container flex flex-col max-w-xl'> 
       <Header />
       <TodoInput addTodo={addTodo} />
       <TodoList 
-        todos={filteredTodos}
+        todos={filteredTodos} 
         activeFilter={activeFilter}
         handleSetComplete={handleSetComplete}
         handleDelete={handleDelete}
