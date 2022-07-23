@@ -1,9 +1,9 @@
 const Todo = ({todo, handleSetComplete, handleDelete}) => {
 
     const {id, title, date, completed} = todo
-
+    
     return (
-        <div className=' flex items-center justify-between p-4 bg-gray-700 border-bborder-solid border-gray-600'>
+        <div className=' flex items-center justify-between px-4 py-2 bg-gray-700 border-bborder-solid border-gray-600'>
             <div className=' flex items-center'>
                 {
                     completed ? (
@@ -14,10 +14,12 @@ const Todo = ({todo, handleSetComplete, handleDelete}) => {
                     <span onClick={() => handleSetComplete(id)} className='border border-solid border-gray-500 rounded-md p-3 mr-3 cursor-pointer'></span>
                     )
                 }
-                <p className={"pl-1 " + ( completed && 'text-indigo-300 line-through')}>
-                    {title}
-                    {date}
+                <p className={"pl-1" + ( completed && 'text-indigo-300 line-through')}>
+                   {title}
+                   <br />
+                  {`Date Todo: ${date}`}
                 </p>
+               
             </div>
             <img onClick={() => handleDelete(id)} className='h-5 w-5 cursor-pointer transition-all duration-300 ease-in select-none' src='/close-icon.svg' alt='Close Icon' />  
         </div>

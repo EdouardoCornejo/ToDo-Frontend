@@ -13,12 +13,14 @@ const TodoInput = ({addTodo}) => {
     if([title, date].includes('')){
         setError(true)
         return 
-    }
-        addTodo(title,date)
-            setTitle('')
-            setDate('')
-        setError(false)
-    }
+        } else{
+            addTodo(title,date)
+                setTitle('')
+                setDate('')
+            setError(false)
+        }
+    }   
+
     const prevent = (e) => {
          if(e.key.toLowerCase() === 'enter'){
             e.preventDefault()
