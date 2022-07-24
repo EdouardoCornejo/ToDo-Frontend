@@ -1,23 +1,35 @@
 import {useState} from 'react'
-import Error from './Error'
+import {Error, ErrorDate} from './Error'
 
 const TodoInput = ({addTodo}) => {
     const[title, setTitle] = useState('')
     const[date, setDate] = useState('')
 
     const[error, setError] = useState(false)
+    const[errorDate, setErrorDate] = useState(false)
     
    const handleAddTodo = (e) => {
     e.preventDefault()
 
-    if([title, date].includes('')){
+    let day = new Date();
+    let today = String(day.getFullYear() + '-' + String(day.getMonth() + 1).padStart(2, '0') + '-' + day.getDate()).padStart(2, '0') ;
+
+     if([title, date].includes('')){ //All fields are required
         setError(true)
         return 
-        } else{
-            addTodo(title,date)
-                setTitle('')
-                setDate('')
-            setError(false)
+    } 
+    setError(false)
+
+    if(date < today){  //Date must be greater than today
+     setErrorDate(true)
+      return
+     }
+      else{
+        addTodo(title,date)
+            setTitle('')
+            setDate('')
+        setError(false)
+        setErrorDate(false)
         }
     }   
 
@@ -36,6 +48,7 @@ const TodoInput = ({addTodo}) => {
                 className="bg-white rounded-lg mb-6 "
             >
                 {error &&  <Error> <p> All fields are required </p> </Error>} 
+                {errorDate &&  <ErrorDate> <p> Date must be greater than today</p> </ErrorDate>} 
 
                 <input type='text'
                     id='text'
@@ -64,8 +77,6 @@ const TodoInput = ({addTodo}) => {
                     className="flex  absolute bg-gray-500 w-md px-6 py-2 mt-1 text-white uppercase font-bold 
                     hover:bg-gray-700 cursor-pointer rounded-lg transition-all"
                     value='Add'
-                    
-                    //value={paciente.id ? ' Editar Paciente': 'Agregar Paciente'}
                  />
             </form>
         </div>
